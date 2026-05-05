@@ -42,14 +42,16 @@
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden;
         }
 
         *, *:before, *:after { box-sizing: inherit; }
-        body { margin: 0; display: flex; flex-direction: column; overflow-x: hidden; }
+        body { margin: 0; display: flex; flex-direction: column; overflow-x: hidden; width: 100%; }
         section { padding: 100px 20px; position: relative; }
         .container { max-width: var(--max-width); margin: 0 auto; width: 100%; }
 
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; margin: 0; color: inherit; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; margin: 0; color: inherit; overflow-wrap: break-word; word-wrap: break-word; }
         h1 { font-weight: 700; letter-spacing: -0.5px; }
         h2 { font-weight: 600; font-family: 'Inter', sans-serif; letter-spacing: 1.5px; margin-bottom: 20px; text-transform: uppercase; font-size: 0.85rem; color: var(--accent-silver); }
         h3 { font-weight: 600; margin-bottom: 15px; font-size: 2.2rem; }
@@ -102,7 +104,7 @@
             display: flex; justify-content: space-between; align-items: center;
             height: 100%; padding: 0 30px; max-width: 1460px; margin: 0 auto;
         }
-        .logo img { height: 75px; width: auto; object-fit: contain; } /* Increased by 25% */
+        .logo img { height: 75px; width: auto; object-fit: contain; }
         .nav-right { display: flex; align-items: center; }
         .nav-links { display: flex; gap: 25px; align-items: center; }
         .nav-links a { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dark); }
@@ -195,24 +197,28 @@
             .timeline-grid { grid-template-columns: repeat(2, 1fr); }
             .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
         @media (max-width: 768px) {
-            /* Reduced font size slightly so "Inmobiliario" fits on one line */
-            h1 { font-size: 2rem; line-height: 1.2; } 
-            
+            /* FIX: uses #hero h1 to match the specificity of the desktop rule
+               "#hero h1 { font-size: 4.5rem }" so the mobile size actually wins.
+               clamp() keeps it proportional across all phone sizes. */
+            #hero h1 { font-size: clamp(1.4rem, 6vw, 2rem); line-height: 1.2; }
+
             /* Pushes text down so it does not hide under the white header */
             #hero { align-items: flex-start; padding-top: 130px; }
-            
+
             header { height: 85px; }
             .logo img { height: 55px; }
-            .nav-links { display: none; } 
+            .nav-links { display: none; }
             .lang-switch { margin-left: auto; border: none; }
             .portfolio-grid, .leadership-grid, .timeline-grid { grid-template-columns: 1fr; }
             .portfolio-card img { height: 350px; }
             section { padding: 60px 15px; }
         }
+
         @media (max-width: 400px) {
             /* Extra safety net for very small phones like iPhone SE */
-            h1 { font-size: 1.75rem; } 
+            #hero h1 { font-size: clamp(1.2rem, 5.5vw, 1.5rem); }
         }
     </style>
 </head>
