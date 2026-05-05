@@ -178,10 +178,15 @@
         .leadership-card p { margin: 0; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--accent-silver); text-transform: uppercase; letter-spacing: 1px;}
 
         /* Footer */
-        footer { padding: 80px 20px; background-color: var(--bg-navy); color: var(--text-silver); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        footer img { height: 60px; margin: 0 auto 30px auto; filter: brightness(0) invert(1) opacity(0.5); transition: 0.3s; }
-        footer img:hover { filter: brightness(0) invert(1) opacity(1); }
-        footer p { max-width: none; margin: 10px 0; font-size: 0.85rem;}
+        footer { padding: 100px 20px; background-color: var(--bg-navy); color: var(--text-silver); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer .container { display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; }
+        footer img { max-height: 110px; margin-bottom: 40px; opacity: 1; transition: 0.3s; }
+        footer p { max-width: none; margin: 10px 0; font-size: 1.15rem; color: var(--accent-silver); }
+        footer a { color: var(--text-light); text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(255,255,255,0.2); transition: 0.3s ease; }
+        footer a:hover { text-decoration-color: var(--text-light); color: var(--text-light); }
+        footer hr.footer-divider { width: 60px; height: 1px; background-color: rgba(255,255,255,0.1); border: none; margin: 40px auto 30px; }
+        footer p.copyright { margin: 0; font-size: 1rem; color: rgba(255, 255, 255, 0.4); }
+        footer p.disclaimer { font-size: 0.85rem; color: rgba(255, 255, 255, 0.25); max-width: 1000px; margin: 30px auto 0; line-height: 1.6; }
 
         @media (max-width: 1100px) {
             h1 { font-size: 3.5rem; }
@@ -201,12 +206,12 @@
         }
     </style>
 </head>
-<body data-lang="en">
+<body data-lang="es">
 
     <header>
         <nav>
             <a href="#" class="logo">
-                <img src="Stockscorp Logo.jpg" alt="Stockscorp S.A.">
+                <img src="Stockscorp Logo.png" alt="Stockscorp S.A.">
             </a>
             
             <div class="nav-right">
@@ -219,8 +224,8 @@
                     <li><a href="#leadership"><span class="en">Leadership</span><span class="es">Liderazgo</span></a></li>
                 </ul>
                 <div class="lang-switch">
-                    <button id="btn-en" class="lang-btn active" onclick="setLanguage('en')">EN</button>
-                    <button id="btn-es" class="lang-btn" onclick="setLanguage('es')">ES</button>
+                    <button id="btn-en" class="lang-btn" onclick="setLanguage('en')">EN</button>
+                    <button id="btn-es" class="lang-btn active" onclick="setLanguage('es')">ES</button>
                 </div>
             </div>
         </nav>
@@ -452,18 +457,20 @@
 
     <footer id="footer">
         <div class="container fade-in">
-            <img src="Stockscorp Logo.jpg" alt="Stockscorp S.A. Logo">
+            <img src="Stockscorp Logo.png" alt="Stockscorp S.A. Logo">
             
-            <p class="en">Headquarters: Samborondon, Ecuador</p>
-            <p class="es">Sede Principal: Samborondón, Ecuador</p>
+            <p><a href="mailto:investors@stockscorp-ec.com">investors@stockscorp-ec.com</a></p>
             
-            <p class="en">Target Markets: Latin America & United States</p>
-            <p class="es">Mercados Objetivo: América Latina y Estados Unidos</p>
+            <p class="en">Samborondón, Ecuador &bull; Latin America &bull; United States</p>
+            <p class="es">Samborondón, Ecuador &bull; América Latina &bull; Estados Unidos</p>
             
-            <p><a href="mailto:investors@stockscorp.ec" style="color: var(--accent-silver);">investors@stockscorp.ec</a></p>
+            <hr class="footer-divider">
             
-            <p class="en" style="margin-top: 40px; color: var(--text-muted);">&copy; 2026 Stockscorp S.A. All rights reserved.</p>
-            <p class="es" style="margin-top: 40px; color: var(--text-muted);">&copy; 2026 Stockscorp S.A. Todos los derechos reservados.</p>
+            <p class="en copyright">&copy; 2026 Stockscorp S.A. All rights reserved.</p>
+            <p class="es copyright">&copy; 2026 Stockscorp S.A. Todos los derechos reservados.</p>
+            
+            <p class="en disclaimer">This website is for informational purposes only and does not constitute an offer or solicitation to buy or sell any security. Past performance is not indicative of future results. Investments involve risk, including the potential loss of principal.</p>
+            <p class="es disclaimer">Este sitio web es solo para fines informativos y no constituye una oferta o solicitud para comprar o vender ningún valor. El rendimiento pasado no es indicativo de resultados futuros. Las inversiones implican riesgos, incluida la posible pérdida del capital.</p>
         </div>
     </footer>
 
