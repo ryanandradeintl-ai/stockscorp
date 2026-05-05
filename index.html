@@ -34,7 +34,7 @@
         body[data-lang="en"] .es { display: none !important; }
         body[data-lang="es"] .en { display: none !important; }
 
-        html {
+        html, body {
             scroll-behavior: smooth;
             box-sizing: border-box;
             background-color: var(--bg-primary);
@@ -42,12 +42,24 @@
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             line-height: 1.6;
+            
+            /* Prevent lateral scrolling globally */
+            max-width: 100vw;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         *, *:before, *:after { box-sizing: inherit; }
-        body { margin: 0; display: flex; flex-direction: column; overflow-x: hidden; }
+        body { display: flex; flex-direction: column; }
         section { padding: 100px 20px; position: relative; }
         .container { max-width: var(--max-width); margin: 0 auto; width: 100%; }
+
+        /* Typography & Word Break for Long Words */
+        h1, h2, h3, h4, p { 
+            overflow-wrap: break-word; 
+            word-wrap: break-word; 
+        }
 
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; margin: 0; color: inherit; }
         h1 { font-weight: 700; letter-spacing: -0.5px; }
@@ -70,6 +82,8 @@
             cursor: pointer;
             transition: 0.3s ease-in-out;
             border-radius: 2px;
+            white-space: normal; /* Ensures long button text wraps instead of breaking layout */
+            text-align: center;
         }
 
         .btn-navy { background-color: var(--bg-navy); color: var(--text-light); border: 1px solid var(--bg-navy); }
@@ -87,7 +101,7 @@
         }
         .fade-in.active { opacity: 1; transform: translateY(0); }
 
-        /* Navigation - Crisp White Header */
+        /* Navigation */
         header {
             height: var(--nav-height);
             background-color: var(--bg-primary);
@@ -102,7 +116,7 @@
             display: flex; justify-content: space-between; align-items: center;
             height: 100%; padding: 0 30px; max-width: 1460px; margin: 0 auto;
         }
-        .logo img { height: 75px; width: auto; object-fit: contain; } /* Increased by 25% */
+        .logo img { height: 75px; width: auto; object-fit: contain; } 
         .nav-right { display: flex; align-items: center; }
         .nav-links { display: flex; gap: 25px; align-items: center; }
         .nav-links a { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dark); }
@@ -189,21 +203,74 @@
         footer p.copyright { margin: 0; font-size: 1rem; color: rgba(255, 255, 255, 0.4); }
         footer p.disclaimer { font-size: 0.85rem; color: rgba(255, 255, 255, 0.25); max-width: 1000px; margin: 30px auto 0; line-height: 1.6; }
 
+        /* Responsive Breakpoints */
         @media (max-width: 1100px) {
             h1 { font-size: 3.5rem; }
             .split-section { grid-template-columns: 1fr; gap: 40px;}
             .timeline-grid { grid-template-columns: repeat(2, 1fr); }
             .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            /* Reset directional styles on medium screens to prevent overlapping */
+            .split-section[style*="direction: rtl;"] { direction: ltr !important; }
+            .split-content[style*="direction: ltr;"] { direction: ltr !important; }
+            .split-image[style*="direction: ltr;"] { direction: ltr !important; }
         }
+
+        /* --------------------------------------
+           MOBILE OPTIMIZATION (THE FIXES)
+           -------------------------------------- */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            header { height: 85px; }
-            .logo img { height: 55px; }
+            h1 { font-size: 2.2rem; line-height: 1.2; }
+            h3 { font-size: 1.8rem; }
+            .subheadline { font-size: 1.05rem; }
+            .target-markets { font-size: 0.75rem; }
+            
+            header { height: 80px; }
+            nav { padding: 0 20px; }
+            .logo img { height: 50px; }
             .nav-links { display: none; } 
-            .lang-switch { margin-left: auto; border: none; }
-            .portfolio-grid, .leadership-grid, .timeline-grid { grid-template-columns: 1fr; }
+            
+            /* Language Toggle Alignment */
+            .lang-switch { margin-left: auto; border: none; padding-left: 0; }
+
+            /* Fix Hero - Convert 100vh to auto height to prevent URL bar cutoff */
+            #hero { 
+                height: auto; 
+                min-height: 100vh;
+                padding-top: 130px; 
+                padding-bottom: 80px;
+                text-align: center; /* Center for mobile */
+            }
+            #hero .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Stack Elements & Center Text on Mobile */
+            .split-content, .equity-callout { text-align: center; }
+            .timeline-item, .leadership-card { text-align: center; }
+            .portfolio-grid, .leadership-grid, .timeline-grid { grid-template-columns: 1fr; gap: 25px; }
+            
+            /* Ensure images scale down cleanly */
+            .split-image img { min-height: 250px; height: auto; max-height: 350px; }
             .portfolio-card img { height: 350px; }
-            section { padding: 60px 15px; }
+            
+            /* Standardize Section Paddings */
+            section { padding: 70px 20px; }
+
+            /* Footer scaling */
+            footer { padding: 60px 20px; }
+            footer p { font-size: 1rem; }
+            footer p.disclaimer { font-size: 0.75rem; }
+            
+            /* Make Buttons Full-Width on Mobile for easier clicking */
+            .btn { width: 100%; max-width: 320px; margin-left: auto; margin-right: auto; margin-bottom: 15px; }
+        }
+
+        /* Extra small phones (like iPhone SE) */
+        @media (max-width: 400px) {
+            h1 { font-size: 1.85rem; }
+            .subheadline { font-size: 1rem; }
         }
     </style>
 </head>
